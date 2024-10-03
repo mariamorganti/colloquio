@@ -78,7 +78,7 @@ namespace colloquio.Controllers
             {
                 return BadRequest();
             }
-            Console.WriteLine("AClass:MyMethodA");
+             
 
             _context.Entry(busteOperatore).State = EntityState.Modified;
 
