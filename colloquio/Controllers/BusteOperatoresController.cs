@@ -68,6 +68,22 @@ namespace colloquio.Controllers
 
             return Ok(busteOperatore);
         }
+        [HttpGet("GetIndiceFromEnd{indice}")]
+        public  ActionResult<string>  GetIndiceFromEnd(int indice)
+        {
+            //index from end c#
+            string[] myArray = { "primo", "secondo", "terzo", "quarto", "quinto" };
+            string s =   myArray[^indice];
+            return Ok(s);
+        }
+
+        [HttpGet("GetRange")] 
+        public string[] GetRange(  int inzio, int fine)
+        {
+            string[] myArray = { "primo", "secondo", "terzo", "quarto", "quinto" };
+            string[] s = myArray[inzio..fine];
+            return s;
+        }
 
         // PUT: api/BusteOperatores/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
