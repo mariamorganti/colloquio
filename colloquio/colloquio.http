@@ -1,0 +1,6 @@
+@colloquio_HostAddress = http://localhost:5291
+
+GET {{colloquio_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
