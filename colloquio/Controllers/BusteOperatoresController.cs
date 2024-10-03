@@ -80,10 +80,25 @@ namespace colloquio.Controllers
         [HttpGet("GetRange")] 
         public string[] GetRange(  int inzio, int fine)
         {
+             
             string[] myArray = { "primo", "secondo", "terzo", "quarto", "quinto" };
-            string[] s = myArray[inzio..fine];
+            //string[] s = myArray[inzio..fine];
+            int ultimo = myArray.Length ;
+            string[] s = myArray[inzio..ultimo];
+
             return s;
         }
+        [HttpGet("GetSpread")]
+        public string?[] GetSpread()
+        {
+            string?[] myArray1 = { "primo", "secondo", "terzo", "quarto", "quinto" };
+            string?[] myArray2 = { "sesto", "settimo", "ottavo", "nono", "decimo" };
+
+            string?[] combinedArray = [..myArray1, ..myArray2];
+
+            return combinedArray;
+        }
+
 
         // PUT: api/BusteOperatores/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
