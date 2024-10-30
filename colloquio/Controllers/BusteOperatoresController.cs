@@ -95,6 +95,18 @@ namespace colloquio.Controllers
             return Ok(busteOperatore);
         }
 
+        [HttpGet("GetBusteOperatoreByService2{IdBusta}")]
+        public async Task<ActionResult<BusteOperatore>> GetBusteOperatore2(string IdBusta)
+        {
+            var busteOperatore = await _bustaOperatore.GetBusteOperatore(IdBusta);
+
+            if (busteOperatore == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(busteOperatore);
+        }
         [HttpGet("GetBusteOperatoreRicevute{IdBusta}")]
         public async Task<ActionResult<BusteOperatore>> GetBusteOperatoreRicevute(string IdBusta)
         {
