@@ -104,7 +104,7 @@ namespace colloquio.Controllers
             {
                 return NotFound();
             }
-
+            int conflittoTest = 0;
             return Ok(busteOperatore);
         }
         [HttpGet("GetBusteOperatoreRicevute{IdBusta}")]
