@@ -1,18 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace colloquio.Models;
 
 public partial class GestionematerialitaContext : DbContext
 {
+    string connectionString = "";
+
+    // Leggi il valore della chiave Connectionstring
+    
     public GestionematerialitaContext()
     {
+
+        var configuration = new ConfigurationBuilder()
+                //.SetBasePath(AppContext.BaseDirectory)
+                //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+         connectionString = configuration.GetValue<string>("Connectionstring");
     }
 
     public GestionematerialitaContext(DbContextOptions<GestionematerialitaContext> options)
         : base(options)
     {
+       
+
     }
 
     public virtual DbSet<AFasiProduzione> AFasiProduziones { get; set; }
@@ -165,10 +178,11 @@ public partial class GestionematerialitaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        
-       // optionsBuilder.UseSqlServer("Server= LAPTOP-U3V5I2SM\\SQLEXPRESS;Database=gestionematerialita;Trusted_Connection=True;TrustServerCertificate=True;");
+       
+        //if (connectionString == null || connectionString.IsNullOrEmpty())
+        //optionsBuilder.UseSqlServer("Server= LAPTOP-U3V5I2SM\\SQLEXPRESS;Database=gestionematerialita;Trusted_Connection=True;TrustServerCertificate=True;");
     }
-      
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

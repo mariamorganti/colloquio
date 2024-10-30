@@ -23,6 +23,45 @@ namespace colloquio.Controllers
             _bustaOperatore = BustaOperatore;
         }
 
+        [HttpGet("EfOrderBy{Frazionario}")]
+        public   async Task<ActionResult<IEnumerable<BusteOperatore>>> EfOrderBy(string Frazionario)
+        {
+            //var BOOrderByIDBusta = await _context.BusteOperatores
+            //                        .Where(b => b.Frazionario == Frazionario)
+            //                        .OrderBy(b => b.IdBusta)
+            //                        .ToListAsync();
+            var BOOrderByIDBusta = await (from BO in _context.BusteOperatores
+                                   where BO.Frazionario == Frazionario
+                                   orderby BO.IdBusta
+                                   select BO).ToListAsync();
+            return BOOrderByIDBusta;
+ 
+        }
+
+        //[HttpGet("EfGroupBy{Frazionario}")] 
+        //public async Task<ActionResult<IEnumerable<IGrouping<string, BusteOperatore>>>> EfGroupBy(string Frazionario)
+        //{
+        //    var gruppiFrazionari = await (from BO in _context.BusteOperatores
+        //                                  where BO.Frazionario == Frazionario
+        //                                  group BO by BO.Frazionario into gruppofraz
+        //                                  select gruppofraz).ToListAsync();
+
+        //    return gruppiFrazionari;
+        //}
+
+        [HttpGet("EfGroupBy{Frazionario}")]
+        public void    EfGroupBy(string Frazionario)
+        {
+            var gruppiFrazionari =  (from BO in _context.BusteOperatores
+                                          where BO.Frazionario == Frazionario
+                                          group BO by BO.IdBusta into gruppoIdBusta
+                                     select gruppoIdBusta).ToListAsync();
+            var sss = gruppiFrazionari;
+
+            //return gruppiFrazionari;
+        }
+
+
         // GET: api/BusteOperatores
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BusteOperatore>>> GetBusteOperatores()
@@ -94,11 +133,21 @@ namespace colloquio.Controllers
             string?[] myArray1 = { "primo", "secondo", "terzo", "quarto", "quinto" };
             string?[] myArray2 = { "sesto", "settimo", "ottavo", "nono", "decimo" };
 
-            string?[] combinedArray = [..myArray1, ..myArray2];
+           //string?[] combinedArray = [..myArray1, ..myArray2];
 
-            return combinedArray;
+            return myArray2;
         }
+        [HttpGet("GetValueRefenceType")]
+        public int GetValueRefenceType()
+        {
+            int x = 120;
+            int y = x;
+            Console.WriteLine($"y prima : {y}");
 
+            x = 50;
+            Console.WriteLine($"y DOPO : {y}");
+            return y;
+        }
 
         // PUT: api/BusteOperatores/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -177,5 +226,16 @@ namespace colloquio.Controllers
         {
             return _context.BusteOperatores.Any(e => e.IdBusta == id);
         }
+        //public bool MagDi(int n1, int n2) { 
+        //    return  (n1 > n2) ? true : false;
+        //}
+        //public bool MinDi(int n1, int n2)
+        //{
+        //    return (n1 < n2) ? true : false;
+        //}
+        //public bool UgualeA(int n1, int n2)
+        //{
+        //    return (n1 == 2) ? true : false;
+        //}
     }
 }
