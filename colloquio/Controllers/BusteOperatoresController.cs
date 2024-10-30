@@ -98,6 +98,7 @@ namespace colloquio.Controllers
         [HttpGet("GetBusteOperatoreByMerge3{IdBusta}")]
         public async Task<ActionResult<BusteOperatore>> GetBusteOperatoreByMerge3(string IdBusta)
         {
+            var eeee = "";
             var busteOperatore = await _bustaOperatore.GetBusteOperatore(IdBusta);
 
             if (busteOperatore == null)
