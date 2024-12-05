@@ -30,4 +30,5 @@ public partial class BusteEccezioni
     public DateTime? DataCreazione { get; set; }
 
     public int TotaleRicevuteInBusta { get; set; }
+    public int TotaleRicevuteInBustaTest { get; set; }
 }

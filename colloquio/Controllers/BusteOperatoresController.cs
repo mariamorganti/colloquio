@@ -17,6 +17,7 @@ namespace colloquio.Controllers
     {
         private readonly GestionematerialitaContext _context;
         private readonly IBustaOperatore _bustaOperatore;
+
         public BusteOperatoresController(GestionematerialitaContext context, IBustaOperatore BustaOperatore)
         {
             _context = context;
@@ -24,18 +25,18 @@ namespace colloquio.Controllers
         }
 
         [HttpGet("EfOrderBy{Frazionario}")]
-        public   async Task<ActionResult<IEnumerable<BusteOperatore>>> EfOrderBy(string Frazionario)
+        public async Task<ActionResult<IEnumerable<BusteOperatore>>> EfOrderBy(string Frazionario)
         {
             //var BOOrderByIDBusta = await _context.BusteOperatores
             //                        .Where(b => b.Frazionario == Frazionario)
             //                        .OrderBy(b => b.IdBusta)
             //                        .ToListAsync();
             var BOOrderByIDBusta = await (from BO in _context.BusteOperatores
-                                   where BO.Frazionario == Frazionario
-                                   orderby BO.IdBusta
-                                   select BO).ToListAsync();
+                                          where BO.Frazionario == Frazionario
+                                          orderby BO.IdBusta
+                                          select BO).ToListAsync();
             return BOOrderByIDBusta;
- 
+
         }
 
         //[HttpGet("EfGroupBy{Frazionario}")] 
@@ -50,12 +51,12 @@ namespace colloquio.Controllers
         //}
 
         [HttpGet("EfGroupBy{Frazionario}")]
-        public void    EfGroupBy(string Frazionario)
+        public void EfGroupBy(string Frazionario)
         {
-            var gruppiFrazionari =  (from BO in _context.BusteOperatores
-                                          where BO.Frazionario == Frazionario
-                                          group BO by BO.IdBusta into gruppoIdBusta
-                                     select gruppoIdBusta).ToListAsync();
+            var gruppiFrazionari = (from BO in _context.BusteOperatores
+                                    where BO.Frazionario == Frazionario
+                                    group BO by BO.IdBusta into gruppoIdBusta
+                                    select gruppoIdBusta).ToListAsync();
             var sss = gruppiFrazionari;
 
             //return gruppiFrazionari;
@@ -120,21 +121,21 @@ namespace colloquio.Controllers
             return Ok(busteOperatore);
         }
         [HttpGet("GetIndiceFromEnd{indice}")]
-        public  ActionResult<string>  GetIndiceFromEnd(int indice)
+        public ActionResult<string> GetIndiceFromEnd(int indice)
         {
             //index from end c#
             string[] myArray = { "primo", "secondo", "terzo", "quarto", "quinto" };
-            string s =   myArray[^indice];
+            string s = myArray[^indice];
             return Ok(s);
         }
 
-        [HttpGet("GetRange")] 
-        public string[] GetRange(  int inzio, int fine)
+        [HttpGet("GetRange")]
+        public string[] GetRange(int inzio, int fine)
         {
-             
+
             string[] myArray = { "primo", "secondo", "terzo", "quarto", "quinto" };
             //string[] s = myArray[inzio..fine];
-            int ultimo = myArray.Length ;
+            int ultimo = myArray.Length;
             string[] s = myArray[inzio..ultimo];
 
             return s;
@@ -145,7 +146,7 @@ namespace colloquio.Controllers
             string?[] myArray1 = { "primo", "secondo", "terzo", "quarto", "quinto" };
             string?[] myArray2 = { "sesto", "settimo", "ottavo", "nono", "decimo" };
 
-           //string?[] combinedArray = [..myArray1, ..myArray2];
+            //string?[] combinedArray = [..myArray1, ..myArray2];
 
             return myArray2;
         }
@@ -170,7 +171,7 @@ namespace colloquio.Controllers
             {
                 return BadRequest();
             }
-             
+
 
             _context.Entry(busteOperatore).State = EntityState.Modified;
 
