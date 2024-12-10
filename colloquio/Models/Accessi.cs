@@ -22,4 +22,5 @@ public partial class Accessi
     public string? NoteProfilo { get; set; }
 
     public bool? ModificaStato { get; set; }
+    public bool? ModificaStatoBis { get; set; }
 }
